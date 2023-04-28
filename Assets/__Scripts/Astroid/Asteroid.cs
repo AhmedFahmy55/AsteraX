@@ -31,7 +31,6 @@ public class Asteroid : MonoBehaviour
         offScreenWrapper = GetComponent<OffScreenWrapper>();
     }
 
-    // Use this for initialization
     void Start()
     {
         AsteraX.AddAsteroid(this);
@@ -46,11 +45,10 @@ public class Asteroid : MonoBehaviour
             InitAsteroidParent();
         }
 
-        // Spawn child Asteroids
         if (size > 1)
         {
             Asteroid ast;
-            //for (int i=0; i<AsteraX.AsteroidsSO.numSmallerAsteroidsToSpawn; i++) {
+            
             for (int i = 0; i < AsteraX.GetLevelInfo().numSubAsteroids; i++)
             {
                 ast = SpawnAsteroid();
@@ -77,11 +75,9 @@ public class Asteroid : MonoBehaviour
 #endif
         offScreenWrapper.enabled = true;
         rigid.isKinematic = false;
-        // Snap this GameObject to the z=0 plane
         Vector3 pos = transform.position;
         pos.z = 0;
         transform.position = pos;
-        // Initialize the velocity for this Asteroid
         InitVelocity();
     }
 
@@ -89,7 +85,6 @@ public class Asteroid : MonoBehaviour
     {
         offScreenWrapper.enabled = false;
         rigid.isKinematic = true;
-        // Make use of the ComponentDivision extension method in Vector3Extensions
         transform.localScale = transform.localScale.ComponentDivide(transform.parent.lossyScale);
     }
 
@@ -97,10 +92,8 @@ public class Asteroid : MonoBehaviour
     {
         Vector3 vel;
 
-        // The initial velocity depends on whether the Asteroid is currently off screen or not
         if (ScreenBounds.OOB(transform.position))
         {
-            // If the Asteroid is out of bounds, just point it toward a point near the center of the sceen
             vel = ((Vector3)Random.insideUnitCircle * 4) - transform.position;
             vel.Normalize();
 
@@ -129,7 +122,6 @@ public class Asteroid : MonoBehaviour
             } while (Mathf.Approximately(vel.magnitude, 0f));
         }
 
-        // Multiply the unit length of vel by the correct speed (randomized) for this size of Asteroid
         vel = vel * Random.Range(AsteraX.AsteroidsSO.minVel, AsteraX.AsteroidsSO.maxVel) / (float)size;
         rigid.velocity = vel;
 
@@ -145,9 +137,7 @@ public class Asteroid : MonoBehaviour
 	}
 #endif
 
-    // NOTE: Allowing parentIsAsteroid and parentAsteroid to call GetComponent<> every
-    //  time is inefficient, however, this only happens when a bullet hits an Asteroid
-    //  which is rarely enough that it isn't a performance hit.
+  
     bool parentIsAsteroid
     {
         get
@@ -174,7 +164,6 @@ public class Asteroid : MonoBehaviour
 
     public void OnCollisionEnter(Collision coll)
     {
-        // If this is the child of another Asteroid, pass this collision up the chain
         if (parentIsAsteroid)
         {
             parentAsteroid.OnCollisionEnter(coll);
@@ -199,15 +188,13 @@ public class Asteroid : MonoBehaviour
                 AchievementManager.AchievementStep(Achievement.eStepType.hitAsteroid, 1);
 
                 if (bull.bDidWrap) {
-                    // Because the second parameter (num) defaults to 1, there's 
-                    //  no need to pass it in.
+                    
                     AchievementManager.AchievementStep(Achievement.eStepType.luckyShot);
                 }
             }
 
             if (size > 1)
             {
-                // Detach the children Asteroids
                 Asteroid[] children = GetComponentsInChildren<Asteroid>();
                 for (int i = 0; i < children.Length; i++)
                 {

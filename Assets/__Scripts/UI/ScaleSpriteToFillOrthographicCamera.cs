@@ -12,7 +12,6 @@ public class ScaleSpriteToFillOrthographicCamera : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        // The camera must be Orthographic for this to work.
         if (camToMatch == null || !camToMatch.orthographic)
         {
             return;
@@ -25,7 +24,6 @@ public class ScaleSpriteToFillOrthographicCamera : MonoBehaviour
         camSize.y = camToMatch.orthographicSize * 2;
         camSize.x = camSize.y * camToMatch.aspect;
 
-        // This makes use of the Vector3Extensions.ComponentDivide extension method
         Vector3 scale = camSize.ComponentDivide(baseSize);
 
         transform.localScale = scale;

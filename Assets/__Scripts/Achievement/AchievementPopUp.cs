@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class AchievementPopUp : MonoBehaviour
 {
-    private static AchievementPopUp _S; // Protected private Singeton (see property S below)
+    private static AchievementPopUp _S; 
 
     [Header("Set in Inspector")]
     public Text     popUpText, popUpDescription;
@@ -18,7 +18,7 @@ public class AchievementPopUp : MonoBehaviour
     public bool     bIsAlreadyPopping = false;
     public List<StringTuple> achievementList = new List<StringTuple>();
 
-    // Use this for initialization
+    
     void Start()
     {
         S = this;
@@ -79,7 +79,7 @@ public class AchievementPopUp : MonoBehaviour
         while (t <= 1.0f)
         {
             t += step;
-            u = 1 - (1 - t) * (1 - t); // This does some fancy easing on the Lerp
+            u = 1 - (1 - t) * (1 - t); 
             transform.position = Vector3.LerpUnclamped(offscreenPosition, startPosition, u);
             yield return new WaitForFixedUpdate();
         }
@@ -91,7 +91,7 @@ public class AchievementPopUp : MonoBehaviour
         while (t <= 1.0f)
         {
             t += step;
-            u = t * t; // This does some fancy easing on the Lerp
+            u = t * t; 
             transform.position = Vector3.Lerp(startPosition, offscreenPosition, u);
             yield return new WaitForFixedUpdate();
         }
@@ -101,16 +101,7 @@ public class AchievementPopUp : MonoBehaviour
     }
 
 
-    // ———————————————— Statics ———————————————— //
-
-    /// <summary>
-    /// <para>This static private property provides some protection for the Singleton _S.</para>
-    /// <para>get {} does return null, but throws an error first.</para>
-    /// <para>set {} allows overwrite of _S by a 2nd instance, but throws an error first.</para>
-    /// <para>Another advantage of using a property here is that it allows you to place
-    /// a breakpoint in the set clause and then look at the call stack if you fear that 
-    /// something random is setting your _S value.</para>
-    /// </summary>
+   
     static private AchievementPopUp S
     {
         get

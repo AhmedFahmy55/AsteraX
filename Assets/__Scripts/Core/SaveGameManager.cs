@@ -5,15 +5,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-// This is a static class, so everything in it must be static
 static public class SaveGameManager
 {
-    // ———————————————— Statics ———————————————— //
-    // I've chosen not to use SNAKE_CASE for statics in this class because everything is static.
+ 
     static private SaveFile saveFile;
     static private string   filePath;
-    // LOCK, if true, prevents the game from saving. This avoids issues that can
-    //  happen while loading files.
+    
     static public bool LOCK
     {
         get;
@@ -79,10 +76,9 @@ static public class SaveGameManager
             Debug.Log("SaveGameManager:Load() – Successfully loaded save file.");
 #endif
             LOCK = true;
-            // Load the Achievements
             AchievementManager.LoadDataFromSaveFile(saveFile);
 
-            // Load the selected ShipParts
+            
             ShipCustomizationPanel.SelectPart(ShipPart.eShipPartType.body, saveFile.selectedBody);
             ShipCustomizationPanel.SelectPart(ShipPart.eShipPartType.turret, saveFile.selectedTurret);
 
@@ -98,7 +94,7 @@ static public class SaveGameManager
 #endif
             LOCK = true;
 
-            // Init Achievements
+            
             AchievementManager.ClearStepsAndAchievements();
             // Init the selected ShipParts
             ShipCustomizationPanel.SelectPart(ShipPart.eShipPartType.body, 0);
@@ -123,17 +119,13 @@ static public class SaveGameManager
                 + " This is absolutely fine if you've never saved or have just deleted the file.");
         }
 
-        // Lock the file to prevent any saving
         LOCK = true;
 
-        // Select the basic ShipParts
         ShipCustomizationPanel.SelectPart(ShipPart.eShipPartType.body, 0);
         ShipCustomizationPanel.SelectPart(ShipPart.eShipPartType.turret, 0);
         
-        // Clear the Steps & Achievements
         AchievementManager.ClearStepsAndAchievements();
 
-        // Unlock the file
         LOCK = false;
     }
 

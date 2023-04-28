@@ -5,18 +5,14 @@ using UnityEngine;
 using UnityEditor;
 #endif
 using System;
-// Thanks to Unity user Aqibsadiq's post with this code:
-// https://forum.unity.com/threads/multiple-enum-select-from-inspector.184729/
 
-/// <summary>
-/// This sets up a [EnumFlags] compiler attribute that tells Unity to allow us to 
-///  edit any enum with that tags using the MaskField (the same type of enum editor
-///  that is used for Physics Layers).
-/// </summary>
+
+
 public class EnumFlagsAttribute : PropertyAttribute
 {
     public EnumFlagsAttribute() { }
 }
+
 #if UNITY_EDITOR 
 [CustomPropertyDrawer( typeof(EnumFlagsAttribute) )]
 public class EnumFlagsAttributePropertyDrawer : PropertyDrawer {

@@ -1,5 +1,4 @@
-﻿//#define DEBUG_AnnounceOnTriggerExit
-
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,15 +10,14 @@ public class OffScreenWrapper : MonoBehaviour {
 	
     
 	void Start(){
-		// Get the Bullet component of this GameObject if it exists.
-		// If there is no Bullet (Script) component, bulletScript will be null
+		
 		bulletScript = gameObject.GetComponent<Bullet>();
     }
     
     
     private void OnTriggerExit(Collider other)
     {
-        // NOTE: OnTriggerExit is still called when this.enabled==false
+        
         if (!enabled)
         {
             return;
@@ -45,13 +43,6 @@ public class OffScreenWrapper : MonoBehaviour {
         ScreenWrap(bounds);
 
 
-#if DEBUG_AnnounceOnTriggerExit
-        // GetComponent is pretty slow, but because this is in a debug test case and 
-        //  only happens once every few seconds, it's okay here.
-		if (GetComponent<Asteroid>() != null) {
-    		Debug.LogWarning(gameObject.name+" OnTriggerExit "+Time.time);
-		}
-#endif
     }
 
 

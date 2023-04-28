@@ -13,16 +13,14 @@ public class TiltWithVelocity : MonoBehaviour
 
     Rigidbody rigid;
 
-    // Use this for initialization
-    void Start()
+    void Awake()
     {
         rigid = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        // Mathf.Tan() is a little expensive, so we can cache the result instead of calculating each FixedUpdate.
+        
         if (degrees != prevDegrees)
         {
             prevDegrees = degrees;

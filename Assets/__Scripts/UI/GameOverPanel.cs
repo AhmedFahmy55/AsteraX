@@ -180,7 +180,7 @@ public class GameOverPanel : ActiveOnlyDuringSomeGameStates {
     
     float LevelTextYScaleEffect(float u) {
         return u * Mathf.Cos(u * Mathf.PI * 2);
-        //return u + Mathf.Sin(Mathf.PI * u);
+        
     }
     
     float realTime {

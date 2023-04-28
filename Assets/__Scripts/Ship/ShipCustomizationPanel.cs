@@ -13,26 +13,19 @@ public class ShipCustomizationPanel : MonoBehaviour
 	}
 
 
-    /// <summary>
-    /// Initializes the ship part toggles and selects the 0th body and turret.
-    /// </summary>
+  
     void InitShipPartToggles() {
-        // The static TOGGLE_DICT will enable us to easily use a static method
-        //  to lock and unlock ShipPartToggles.
+       
         TOGGLE_DICT = new Dictionary<ShipPart.eShipPartType, ShipPartToggle[]>();
 
-        // In order for this code to work, we must believe that there will be an
-        //  even number of ShipPartToggles and that half will be body toggles and
-        //  half will be turret toggles.
+       
         ShipPartToggle[] shipPartToggles = GetComponentsInChildren<ShipPartToggle>();
         int len = shipPartToggles.Length/2;
 
         TOGGLE_DICT.Add(ShipPart.eShipPartType.body, new ShipPartToggle[len]);
         TOGGLE_DICT.Add(ShipPart.eShipPartType.turret, new ShipPartToggle[len]);
 
-        // There are several places that this initialization could fail in the
-        //  foreach loop below, so I'm setting inited to true here, which allows
-        //  me to set it to false in the loop if something goes wrong.
+   
         inited = true;
 
         foreach (ShipPartToggle spt in shipPartToggles)
@@ -44,13 +37,13 @@ public class ShipCustomizationPanel : MonoBehaviour
                     Debug.LogWarning("ShipCustomizationPanel.InitShipPartToggles() - "
                         + "A ShipPartType has a partNum that is greater than allowed: "
                         + "part: " + spt.partType + " #: " + spt.partNum + ".");
-                    inited = false; // This error causes inited to be false
+                    inited = false; 
                 }
             } else {
                 Debug.LogError("ShipCustomizationPanel.InitShipPartToggles() - "
                                +"A ShipPartToggle has an unexpected eShipPartType of "
                                + spt.partType + " on GameObject: " + spt.gameObject.name);
-                inited = false; // This error causes inited to be false
+                inited = false; 
             }
 
         }
