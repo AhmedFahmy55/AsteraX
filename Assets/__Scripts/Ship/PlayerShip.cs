@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerShip : MonoBehaviour
 {
-    // This is a somewhat protected private singleton for PlayerShip
+    
     static private PlayerShip   _S;
     static public PlayerShip    S
     {
@@ -145,12 +145,6 @@ public class PlayerShip : MonoBehaviour
 #endif
         StartCoroutine(AsteraX.FindRespawnPointCoroutine(transform.position, RespawnCallback)); 
 
-        // Initially, I had made the gameObject inactive, but this caused the 
-        //  coroutine called above to never return from yield!
-        //gameObject.SetActive(false);
-
-        // Now, instead, I turn off the OffScreenWrapper and move the GameObject 
-        // outside the play area until  RespawnCallback is called.
         OffScreenWrapper wrapper = GetComponent<OffScreenWrapper>();
         if (wrapper != null) {
             wrapper.enabled = false;

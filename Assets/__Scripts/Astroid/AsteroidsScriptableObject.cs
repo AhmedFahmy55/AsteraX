@@ -6,11 +6,11 @@ using UnityEngine;
 [System.Serializable]
 public class AsteroidsScriptableObject : ScriptableObject
 {
-    static public AsteroidsScriptableObject S; // This Scriptable Object is an unprotected Singleton
+    static public AsteroidsScriptableObject S; 
 
     public AsteroidsScriptableObject()
     {
-        S = this; // Assign the Singleton as part of the constructor.
+        S = this; 
     }
 
 	public float        minVel = 5;
