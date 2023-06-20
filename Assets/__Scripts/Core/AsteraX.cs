@@ -1,6 +1,7 @@
 ﻿//#define DEBUG_AsteraX_LogMethods
 //#define DEBUG_AsteraX_RespawnNotifications
 
+using FPS.Sounds;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -108,6 +109,7 @@ public class AsteraX : MonoBehaviour
         AddScore(0);
 
         SaveGameManager.Load();
+        SoundManager.Instannce.PlaySound(Sound.Ambian,transform.position);
     }
 
 

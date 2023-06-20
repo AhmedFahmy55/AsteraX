@@ -1,5 +1,6 @@
 ﻿#define DEBUG_PlayerShip_RespawnNotifications
 
+using FPS.Sounds;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ public class PlayerShip : MonoBehaviour
 
     static public int   JUMPS = 3;
     static public float	LAST_COLLISION = -1000;
-    static public float COLLISION_DELAY = 1;
+    static public float COLLISION_DELAY = 2;
 
 
     [Header("Set in Inspector")]
@@ -75,7 +76,6 @@ public class PlayerShip : MonoBehaviour
         if ( f>.1f&&!AsteraX.PAUSED)
         {
             Fire();
-            Debug.Log("fire");
       
         }
     }
@@ -111,6 +111,7 @@ public class PlayerShip : MonoBehaviour
         Vector3 pos = Camera.main.ScreenToWorldPoint(mPos);
         // Instantiate the Bullet and set its direction
         GameObject go = Instantiate<GameObject>(bulletPrefab);
+        SoundManager.Instannce.PlaySound(Sound.Shoot,transform.position);
         go.transform.position = transform.position;
         go.transform.LookAt(pos);
     }
@@ -129,6 +130,7 @@ public class PlayerShip : MonoBehaviour
         }
 
         JUMPS--;
+        SoundManager.Instannce.PlaySound(Sound.impact,transform.position);
         if (JUMPS < 0) {
             gameObject.SetActive(false);
             AsteraX.GameOver();
