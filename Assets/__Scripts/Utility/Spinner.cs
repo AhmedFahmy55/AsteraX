@@ -8,6 +8,6 @@ public class Spinner : MonoBehaviour {
 	
 	void Update () {
         
-        transform.rotation = Quaternion.Euler(0, 0, degPerSec * Time.realtimeSinceStartup);
+        transform.rotation *= Quaternion.Euler(0, 0, degPerSec*Time.deltaTime);
 	}
 }
